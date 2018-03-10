@@ -1,12 +1,11 @@
 {
-	"name": "@linc.world/jazzicon",
+	"name": "jazzicon",
 	"version": "2.0.0",
 	"description": "A starter project using react-hyperscript and beefy with ES6.",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"install": "cp node_modules/dot-files-linc/.eslintrc ./.eslintrc",
-		"start": "beefy sample.js --live --open"
+		"setup": "cp node_modules/dot-files-linc/.eslintrc ./.eslintrc"
 	},
 	"author": "Brahma Dev",
 	"license": "ISC",
@@ -21,14 +20,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/flyswatter/jazzicon.git"
+		"url": "git+https://github.com/LincWorld/jazzicon.git"
 	},
 	"keywords": [
 		"identicon",
 		"jazz"
 	],
 	"bugs": {
-		"url": "https://github.com/flyswatter/jazzicon/issues"
+		"url": "https://github.com/LincWorld/jazzicon/issues"
 	},
-	"homepage": "https://github.com/flyswatter/jazzicon#readme"
+	"homepage": "https://github.com/LincWorld/jazzicon#readme"
 }
