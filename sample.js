@@ -1,7 +1,11 @@
-var jazzicon = require('./')
-
-var body = document.querySelector('body')
-for(var i = 0; i < 600; i++) {
-  var el = jazzicon(100, i)
-  body.appendChild(el)
-}
+var jazzicon = require('./');
+var fs = require('fs');
+jazzicon(512, Math.random() * 10).then(function(e) {
+	fs.writeFile("test" + (new Date()).getTime() + ".jpg", e, "binary", function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log("The file was saved!");
+		}
+	});
+});
