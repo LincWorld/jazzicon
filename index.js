@@ -1,3 +1,4 @@
+var sharp = require('sharp');
 var MersenneTwister = require('mersenne-twister');
 var Color = require('color');
 var colors = require('./colors');
@@ -7,7 +8,6 @@ var maxWidth = 1000;
 var angleMod = 3;
 var jsdom = require("jsdom");
 var svgns = 'http://www.w3.org/2000/svg';
-var sharp = require('sharp');
 var generator;
 
 function hueShift(colors, generator) {
