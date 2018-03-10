@@ -1,4 +1,4 @@
-var sharp = require('sharp');
+var svg2img = require('svg2img');
 var MersenneTwister = require('mersenne-twister');
 var Color = require('color');
 var colors = require('./colors');
@@ -7,6 +7,7 @@ var wobble = 30;
 var maxWidth = 1000;
 var angleMod = 3;
 var jsdom = require("jsdom");
+var pngToJpeg = require('png-to-jpeg');
 var svgns = 'http://www.w3.org/2000/svg';
 var generator;
 
@@ -68,11 +69,31 @@ function generateIdenticon(diameter, seed) {
 	svg.setAttributeNS(null, 'width', diameter);
 	svg.setAttributeNS(null, 'height', diameter);
 
+	//Set BG
+	var shape = dom.window.document.createElementNS(svgns, 'rect');
+	shape.setAttributeNS(null, 'x', '0');
+	shape.setAttributeNS(null, 'y', '0');
+	shape.setAttributeNS(null, 'width', diameter);
+	shape.setAttributeNS(null, 'height', diameter);
+	shape.setAttributeNS(null, 'fill', bgColor);
+	svg.appendChild(shape);
+
 	for (var i = 0; i < shapeCount - 1; i++) {
 		genShape(dom.window.document, remainingColors, diameter, i, shapeCount - 1, svg);
 	}
 
-	return sharp(new Buffer(svg.outerHTML)).background(bgColor).flatten().toFormat("jpeg").toBuffer();
+	return new Promise(function(resolve, reject) {
+		svg2img(svg.outerHTML, {
+			format: 'png'
+		}, function(err, buffer) {
+			if (err) {
+				return reject(err);
+			}
+			pngToJpeg({
+				quality: 80
+			})(buffer).then(resolve).catch(reject);
+		});
+	});
 }
 
 module.exports = generateIdenticon;

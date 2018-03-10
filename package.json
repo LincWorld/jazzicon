@@ -10,10 +10,11 @@
 	"author": "Brahma Dev",
 	"license": "ISC",
 	"dependencies": {
-		"color": "^1.0.0",
+		"color": "^0.11.3",
 		"jsdom": "^11.6.2",
 		"mersenne-twister": "^1.1.0",
-		"sharp": "^0.20.0"
+		"png-to-jpeg": "^1.0.1",
+		"svg2img": "^0.2.8"
 	},
 	"devDependencies": {
 		"dot-files-linc": "git+https://github.com/LincWorld/dot-files.git"
