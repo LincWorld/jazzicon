@@ -4,7 +4,6 @@ var Color = require('color');
 var colors = require('./colors');
 var shapeCount = 4;
 var wobble = 30;
-var maxWidth = 1000;
 var angleMod = 3;
 var jsdom = require("jsdom");
 var pngToJpeg = require('png-to-jpeg');
@@ -29,16 +28,16 @@ function genColor(colors) {
 
 function genShape(document, remainingColors, diameter, i, total, svg) {
 	var center = diameter / 2;
-
+	var pseudoDiam = diameter * (0.7 + Math.random() * 0.3);
 	var shape = document.createElementNS(svgns, 'rect');
 	shape.setAttributeNS(null, 'x', '0');
 	shape.setAttributeNS(null, 'y', '0');
-	shape.setAttributeNS(null, 'width', diameter);
-	shape.setAttributeNS(null, 'height', diameter);
+	shape.setAttributeNS(null, 'width', pseudoDiam);
+	shape.setAttributeNS(null, 'height', pseudoDiam);
 
 	var firstRot = generator.random();
 	var angle = Math.PI * 2 * firstRot;
-	var velocity = diameter / total * generator.random() + (i * diameter / total);
+	var velocity = pseudoDiam / total * generator.random() + (i * pseudoDiam / total);
 
 	var tx = (Math.cos(angle) * velocity);
 	var ty = (Math.sin(angle) * velocity);
@@ -51,7 +50,7 @@ function genShape(document, remainingColors, diameter, i, total, svg) {
 	var rotate = 'rotate(' + rot.toFixed(1) + ' ' + center + ' ' + center + ')';
 	var transform = translate + ' ' + rotate;
 	shape.setAttributeNS(null, 'transform', transform);
-	var fill = genColor(remainingColors);
+	var fill = Color(genColor(remainingColors)).alpha(0.5 + Math.random() * 0.5).rgbString();
 	shape.setAttributeNS(null, 'fill', fill);
 
 	svg.appendChild(shape);
